@@ -17,7 +17,7 @@ static int borderpx = 2;
  * 4: value of shell in /etc/passwd
  * 5: value of shell in config.h
  */
-static char shell[] = "/bin/sh";
+static char shell[] = "/bin/bash --login";
 static char *utmp = NULL;
 static char stty_args[] = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 
@@ -84,36 +84,34 @@ static char termname[] = "st-256color";
 static unsigned int tabspaces = 8;
 
 /* bg opacity */
-static const int alpha = 0xdd;
+static const int alpha = 0xed;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+	"#0f0f0f", // 0
+	"#aa6644", // 1
+	"#445533", // 2
+	"#eeddaa", // 3
+	"#445566", // 4
+	"#ab4489", // 5
+	"#4499ab", // 6
+	"#f0f0f0", // 7
 
 	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+	"#2f2f2f", // 8
+	"#dd9955", // 9
+	"#778844", // 10
+	"#eedd66", // 11
+	"#6676ed", // 12
+	"#de5499", // 13
+	"#5499de", // 14
+	"#ffffff", // 15
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"black",
+  /* "black", */
 };
 
 
