@@ -7,7 +7,7 @@
  */
 static char font[] = "Source Code Pro:pixelsize=18:antialias=true:autohint=true";
 static int borderpx = 0;
-define histsize 200000
+define histsize 200000;
 
 /*
  * What program is execed by st depends of these precedence rules:
