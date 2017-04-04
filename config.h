@@ -85,10 +85,11 @@ static char termname[] = "st-256color";
 static unsigned int tabspaces = 2;
 
 /* bg opacity */
-static const int alpha = 0xdd;
+static const int alpha = 0xff;
 
 /* Terminal colors (16 first used in escape sequence) */
-static const char *colorname[] = {
+/* static const char *colorname[] = { */
+static const char *altcolorname[] = {
   /* solarized dark */
   "#073642",  /*  0: black    */
   "#dc322f",  /*  1: red      */
@@ -111,7 +112,8 @@ static const char *colorname[] = {
 };
 
 /* Terminal colors for alternate (light) palette */
-static const char *altcolorname[] = {
+/* static const char *altcolorname[] = { */
+static const char *colorname[] = {
 	/* solarized light */
 	"#eee8d5",  /*  0: black    */
 	"#dc322f",  /*  1: red      */
