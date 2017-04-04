@@ -61,7 +61,6 @@ char *argv0;
 #define XK_ANY_MOD    UINT_MAX
 #define XK_NO_MOD     0
 #define XK_SWITCH_MOD (1<<13)
-#define histsize 2000
 #define OPAQUE 0Xff
 
 /* macros */
