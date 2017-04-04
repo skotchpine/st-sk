@@ -331,6 +331,7 @@ static void clippaste(const Arg *);
 static void kscrolldown(const Arg *);
 static void kscrollup(const Arg *);
 static void numlock(const Arg *);
+static void swapcolors(const Arg *);
 static void selpaste(const Arg *);
 static void xzoom(const Arg *);
 static void xzoomabs(const Arg *);
@@ -384,7 +385,7 @@ typedef struct {
 
 /* Drawing Context */
 typedef struct {
-	Color col[MAX(LEN(colorname), 256)];
+	Color col[MAX(MAX(LEN(colorname), LEN(altcolorname)), 256)];
 	Font font, bfont, ifont, ibfont;
 	GC gc;
 } DC;
@@ -562,6 +563,8 @@ static char *opt_line  = NULL;
 static char *opt_name  = NULL;
 static char *opt_title = NULL;
 static int oldbutton   = 3; /* button event on startup: 3 = release */
+
+static int usealtcolors = 0; /* 1 to use alternate palette */
 
 static char *usedfont = NULL;
 static double usedfontsize = 0;
@@ -3336,6 +3339,11 @@ sixd_to_16bit(int x)
 	return x == 0 ? 0 : 0x3737 + 0x2828 * x;
 }
 
+const char* getcolorname(int i)
+{
+    return (usealtcolors) ?  altcolorname[i] : colorname[i];
+}
+
 int
 xloadcolor(int i, const char *name, Color *ncolor)
 {
@@ -3354,7 +3362,7 @@ xloadcolor(int i, const char *name, Color *ncolor)
 			return XftColorAllocValue(xw.dpy, xw.vis,
 			                          xw.cmap, &color, ncolor);
 		} else
-			name = colorname[i];
+			name = getcolorname(i);
 	}
 
 	return XftColorAllocName(xw.dpy, xw.vis, xw.cmap, name, ncolor);
@@ -3374,8 +3382,8 @@ xloadcols(void)
 
 	for (i = 0; i < LEN(dc.col); i++)
 		if (!xloadcolor(i, NULL, &dc.col[i])) {
-			if (colorname[i])
-				die("Could not allocate color '%s'\n", colorname[i]);
+			if (getcolorname(i))
+				die("Could not allocate color '%s'\n", getcolorname(i));
 			else
 				die("Could not allocate color %d\n", i);
 		}
@@ -3794,13 +3802,13 @@ xinit(void)
 	cursor = XCreateFontCursor(xw.dpy, mouseshape);
 	XDefineCursor(xw.dpy, xw.win, cursor);
 
-	if (XParseColor(xw.dpy, xw.cmap, colorname[mousefg], &xmousefg) == 0) {
+	if (XParseColor(xw.dpy, xw.cmap, getcolorname(mousefg), &xmousefg) == 0) {
 		xmousefg.red   = 0xffff;
 		xmousefg.green = 0xffff;
 		xmousefg.blue  = 0xffff;
 	}
 
-	if (XParseColor(xw.dpy, xw.cmap, colorname[mousebg], &xmousebg) == 0) {
+	if (XParseColor(xw.dpy, xw.cmap, getcolorname(mousebg), &xmousebg) == 0) {
 		xmousebg.red   = 0x0000;
 		xmousebg.green = 0x0000;
 		xmousebg.blue  = 0x0000;
@@ -4353,6 +4361,14 @@ void
 numlock(const Arg *dummy)
 {
 	term.numlock ^= 1;
+}
+
+void
+swapcolors(const Arg *dummy)
+{
+	usealtcolors = !usealtcolors;
+	xloadcols();
+	redraw();
 }
 
 char*
