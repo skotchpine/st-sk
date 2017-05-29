@@ -35,3 +35,8 @@ ${OBJ}: config.h
 st: ${OBJ}
 	@echo CC -o $@
 	@${CC} -o $@ ${OBJ} ${LDFLAGS}
+
+install:
+	mkdir -p $(DESTDIR)$(PREFIX)/bin/
+	cp -f st $(DESTDIR)$(PREFIX)/bin/
+
