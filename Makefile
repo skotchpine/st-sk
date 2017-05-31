@@ -8,29 +8,14 @@ LIBS = -L/usr/lib -lc -L${X11LIB} -lm -lrt -lX11 -lutil -lXext -lXft -lXrender\
        `pkg-config --libs fontconfig`  \
        `pkg-config --libs freetype2`
 
-CPPFLAGS = -DVERSION=\"${VERSION}\" -D_XOPEN_SOURCE=600
+CPPFLAGS += -DVERSION=\"${VERSION}\" -D_XOPEN_SOURCE=600
 CFLAGS += -g -std=c99 -pedantic -Wall -Wvariadic-macros -Os ${INCS} ${CPPFLAGS}
 LDFLAGS += -g ${LIBS}
 
 SRC = st.c
 OBJ = ${SRC:.c=.o}
 
-all: options st
-
-options:
-	@echo st build options:
-	@echo "CFLAGS   = ${CFLAGS}"
-	@echo "LDFLAGS  = ${LDFLAGS}"
-	@echo "CC       = ${CC}"
-
-config.h:
-	cp config.def.h config.h
-
-.c.o:
-	@echo CC $<
-	@${CC} -c ${CFLAGS} $<
-
-${OBJ}: config.h
+all: st
 
 st: ${OBJ}
 	@echo CC -o $@
@@ -39,4 +24,7 @@ st: ${OBJ}
 install:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin/
 	cp -f st $(DESTDIR)$(PREFIX)/bin/
+
+clean:
+	rm -f st st.o
 
