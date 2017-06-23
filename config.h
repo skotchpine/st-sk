@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char font[] = "Source Code Pro:pixelsize=18:antialias=true:autohint=true";
+static char font[] = "Source Code Pro:pixelsize=10:antialias=true:autohint=true";
 static int borderpx = 0;
 
 #define histsize 200000
@@ -85,7 +85,7 @@ static char termname[] = "st";
 static unsigned int tabspaces = 2;
 
 /* bg opacity */
-static const int alpha = 0xdd;
+static const int alpha = 0xcc;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
@@ -97,7 +97,7 @@ static const char *colorname[] = {
   "#ab7438",  /*  3: yellow  */
   "#475971",  /*  4: blue    */
   "#694255",  /*  5: magenta */
-  "#3e6868",  /*  6: cyan    */
+  "#5e8888",  /*  6: cyan    */
   "#cfa696",  /*  7: white   */
   "#5b4041",  /*  8: black   */
   "#b43030",  /*  9: red     */
@@ -122,8 +122,8 @@ static const char *altcolorname[] = {
 	"#b58900",  /*  3: yellow   */
 	"#268bd2",  /*  4: blue     */
 	"#d33682",  /*  5: magenta  */
-	"#2aa198",  /*  6: cyan     */
-	"#073642",  /*  7: white    */
+	"#6ae1d8",  /*  6: cyan     */
+	"#376682",  /*  7: white    */
 	"#fdf6e3",  /*  8: brblack  */
 	"#cb4b16",  /*  9: brred    */
 	"#93a1a1",  /* 10: brgreen  */
