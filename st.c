@@ -28,6 +28,7 @@
 #include <X11/keysym.h>
 #include <X11/Xft/Xft.h>
 #include <X11/XKBlib.h>
+#include <X11/Xresource.h>
 #include <fontconfig/fontconfig.h>
 #include <wchar.h>
 
@@ -82,6 +83,26 @@ char *argv0;
 #define TIMEDIFF(t1, t2)	((t1.tv_sec-t2.tv_sec)*1000 + \
 				(t1.tv_nsec-t2.tv_nsec)/1E6)
 #define MODBIT(x, set, bit)	((set) ? ((x) |= (bit)) : ((x) &= ~(bit)))
+
+#define XRESOURCE_LOAD_STRING(NAME, DST) \
+	XrmGetResource(db, NAME, NAME, &type, &ret); \
+	if (ret.addr != NULL && !strncmp("String", type, 64)) \
+		DST = ret.addr;
+
+#define XRESOURCE_LOAD_HEX(NAME, DST) \
+	XrmGetResource(db, NAME, NAME, &type, &ret); \
+	if (ret.addr != NULL && !strncmp("String", type, 64)) \
+		DST = strtol(ret.addr, NULL, 0);
+
+#define XRESOURCE_LOAD_INTEGER(NAME, DST) \
+	XrmGetResource(db, NAME, NAME, &type, &ret); \
+	if (ret.addr != NULL && !strncmp("String", type, 64)) \
+		DST = strtoul(ret.addr, NULL, 10);
+
+#define XRESOURCE_LOAD_FLOAT(NAME, DST) \
+	XrmGetResource(db, NAME, NAME, &type, &ret); \
+	if (ret.addr != NULL && !strncmp("String", type, 64)) \
+		DST = strtof(ret.addr, NULL);
 
 #define USE_ARGB (alpha != OPAQUE && opt_embed == NULL)
 
@@ -4628,6 +4649,69 @@ usage(void)
 	    " [stty_args ...]\n", argv0, argv0);
 }
 
+void
+config_init(void)
+{
+	if(!(xw.dpy = XOpenDisplay(NULL)))
+		die("Can't open display\n");
+
+	char *resm;
+	char *type;
+	XrmDatabase db;
+	XrmValue ret;
+
+	XrmInitialize();
+
+	if ((resm = XResourceManagerString(xw.dpy)) == NULL) return;
+	db = XrmGetStringDatabase(resm);
+	
+	XRESOURCE_LOAD_HEX("st.alpha", alpha);
+
+	XRESOURCE_LOAD_STRING("st.fg", colorname[255]);
+	XRESOURCE_LOAD_STRING("st.bg", colorname[256]);
+	XRESOURCE_LOAD_STRING("st.cs", colorname[257]);
+	XRESOURCE_LOAD_STRING("st.rcs", colorname[258]);
+
+	XRESOURCE_LOAD_STRING("st.altfg",  altcolorname[255]);
+	XRESOURCE_LOAD_STRING("st.altbg",  altcolorname[256]);
+	XRESOURCE_LOAD_STRING("st.altcs",  altcolorname[257]);
+	XRESOURCE_LOAD_STRING("st.altrcs", altcolorname[258]);
+
+	XRESOURCE_LOAD_STRING("st.color0",  colorname[0]);
+	XRESOURCE_LOAD_STRING("st.color1",  colorname[1]);
+	XRESOURCE_LOAD_STRING("st.color2",  colorname[2]);
+	XRESOURCE_LOAD_STRING("st.color3",  colorname[3]);
+	XRESOURCE_LOAD_STRING("st.color4",  colorname[4]);
+	XRESOURCE_LOAD_STRING("st.color5",  colorname[5]);
+	XRESOURCE_LOAD_STRING("st.color6",  colorname[6]);
+	XRESOURCE_LOAD_STRING("st.color7",  colorname[7]);
+	XRESOURCE_LOAD_STRING("st.color8",  colorname[8]);
+	XRESOURCE_LOAD_STRING("st.color9",  colorname[9]);
+	XRESOURCE_LOAD_STRING("st.color10", colorname[10]);
+	XRESOURCE_LOAD_STRING("st.color11", colorname[11]);
+	XRESOURCE_LOAD_STRING("st.color12", colorname[12]);
+	XRESOURCE_LOAD_STRING("st.color13", colorname[13]);
+	XRESOURCE_LOAD_STRING("st.color14", colorname[14]);
+	XRESOURCE_LOAD_STRING("st.color15", colorname[15]);
+
+	XRESOURCE_LOAD_STRING("st.altcolor0",  altcolorname[0]);
+	XRESOURCE_LOAD_STRING("st.altcolor1",  altcolorname[1]);
+	XRESOURCE_LOAD_STRING("st.altcolor2",  altcolorname[2]);
+	XRESOURCE_LOAD_STRING("st.altcolor3",  altcolorname[3]);
+	XRESOURCE_LOAD_STRING("st.altcolor4",  altcolorname[4]);
+	XRESOURCE_LOAD_STRING("st.altcolor5",  altcolorname[5]);
+	XRESOURCE_LOAD_STRING("st.altcolor6",  altcolorname[6]);
+	XRESOURCE_LOAD_STRING("st.altcolor7",  altcolorname[7]);
+	XRESOURCE_LOAD_STRING("st.altcolor8",  altcolorname[8]);
+	XRESOURCE_LOAD_STRING("st.altcolor9",  altcolorname[9]);
+	XRESOURCE_LOAD_STRING("st.altcolor10", altcolorname[10]);
+	XRESOURCE_LOAD_STRING("st.altcolor11", altcolorname[11]);
+	XRESOURCE_LOAD_STRING("st.altcolor12", altcolorname[12]);
+	XRESOURCE_LOAD_STRING("st.altcolor13", altcolorname[13]);
+	XRESOURCE_LOAD_STRING("st.altcolor14", altcolorname[14]);
+	XRESOURCE_LOAD_STRING("st.altcolor15", altcolorname[15]);
+}
+
 int
 main(int argc, char *argv[])
 {
@@ -4688,6 +4772,7 @@ run:
 	}
 	setlocale(LC_CTYPE, "");
 	XSetLocaleModifiers("");
+	config_init();
 	tnew(MAX(cols, 1), MAX(rows, 1));
 	xinit();
 	selinit();
