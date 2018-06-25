@@ -4664,52 +4664,52 @@ config_init(void)
 
 	if ((resm = XResourceManagerString(xw.dpy)) == NULL) return;
 	db = XrmGetStringDatabase(resm);
-	
-	XRESOURCE_LOAD_HEX("st.alpha", alpha);
 
-	XRESOURCE_LOAD_STRING("st.fg", colorname[255]);
-	XRESOURCE_LOAD_STRING("st.bg", colorname[256]);
-	XRESOURCE_LOAD_STRING("st.cs", colorname[257]);
-	XRESOURCE_LOAD_STRING("st.rcs", colorname[258]);
+	XRESOURCE_LOAD_HEX("sk.alpha", alpha);
 
-	XRESOURCE_LOAD_STRING("st.altfg",  altcolorname[255]);
-	XRESOURCE_LOAD_STRING("st.altbg",  altcolorname[256]);
-	XRESOURCE_LOAD_STRING("st.altcs",  altcolorname[257]);
-	XRESOURCE_LOAD_STRING("st.altrcs", altcolorname[258]);
+	XRESOURCE_LOAD_STRING("sk.fg", colorname[255]);
+	XRESOURCE_LOAD_STRING("sk.bg", colorname[256]);
+	XRESOURCE_LOAD_STRING("sk.cs", colorname[257]);
+	XRESOURCE_LOAD_STRING("sk.rcs", colorname[258]);
 
-	XRESOURCE_LOAD_STRING("st.color0",  colorname[0]);
-	XRESOURCE_LOAD_STRING("st.color1",  colorname[1]);
-	XRESOURCE_LOAD_STRING("st.color2",  colorname[2]);
-	XRESOURCE_LOAD_STRING("st.color3",  colorname[3]);
-	XRESOURCE_LOAD_STRING("st.color4",  colorname[4]);
-	XRESOURCE_LOAD_STRING("st.color5",  colorname[5]);
-	XRESOURCE_LOAD_STRING("st.color6",  colorname[6]);
-	XRESOURCE_LOAD_STRING("st.color7",  colorname[7]);
-	XRESOURCE_LOAD_STRING("st.color8",  colorname[8]);
-	XRESOURCE_LOAD_STRING("st.color9",  colorname[9]);
-	XRESOURCE_LOAD_STRING("st.color10", colorname[10]);
-	XRESOURCE_LOAD_STRING("st.color11", colorname[11]);
-	XRESOURCE_LOAD_STRING("st.color12", colorname[12]);
-	XRESOURCE_LOAD_STRING("st.color13", colorname[13]);
-	XRESOURCE_LOAD_STRING("st.color14", colorname[14]);
-	XRESOURCE_LOAD_STRING("st.color15", colorname[15]);
+	XRESOURCE_LOAD_STRING("sk.altfg",  altcolorname[255]);
+	XRESOURCE_LOAD_STRING("sk.altbg",  altcolorname[256]);
+	XRESOURCE_LOAD_STRING("sk.altcs",  altcolorname[257]);
+	XRESOURCE_LOAD_STRING("sk.altrcs", altcolorname[258]);
 
-	XRESOURCE_LOAD_STRING("st.altcolor0",  altcolorname[0]);
-	XRESOURCE_LOAD_STRING("st.altcolor1",  altcolorname[1]);
-	XRESOURCE_LOAD_STRING("st.altcolor2",  altcolorname[2]);
-	XRESOURCE_LOAD_STRING("st.altcolor3",  altcolorname[3]);
-	XRESOURCE_LOAD_STRING("st.altcolor4",  altcolorname[4]);
-	XRESOURCE_LOAD_STRING("st.altcolor5",  altcolorname[5]);
-	XRESOURCE_LOAD_STRING("st.altcolor6",  altcolorname[6]);
-	XRESOURCE_LOAD_STRING("st.altcolor7",  altcolorname[7]);
-	XRESOURCE_LOAD_STRING("st.altcolor8",  altcolorname[8]);
-	XRESOURCE_LOAD_STRING("st.altcolor9",  altcolorname[9]);
-	XRESOURCE_LOAD_STRING("st.altcolor10", altcolorname[10]);
-	XRESOURCE_LOAD_STRING("st.altcolor11", altcolorname[11]);
-	XRESOURCE_LOAD_STRING("st.altcolor12", altcolorname[12]);
-	XRESOURCE_LOAD_STRING("st.altcolor13", altcolorname[13]);
-	XRESOURCE_LOAD_STRING("st.altcolor14", altcolorname[14]);
-	XRESOURCE_LOAD_STRING("st.altcolor15", altcolorname[15]);
+	XRESOURCE_LOAD_STRING("sk.color0",  colorname[0]);
+	XRESOURCE_LOAD_STRING("sk.color1",  colorname[1]);
+	XRESOURCE_LOAD_STRING("sk.color2",  colorname[2]);
+	XRESOURCE_LOAD_STRING("sk.color3",  colorname[3]);
+	XRESOURCE_LOAD_STRING("sk.color4",  colorname[4]);
+	XRESOURCE_LOAD_STRING("sk.color5",  colorname[5]);
+	XRESOURCE_LOAD_STRING("sk.color6",  colorname[6]);
+	XRESOURCE_LOAD_STRING("sk.color7",  colorname[7]);
+	XRESOURCE_LOAD_STRING("sk.color8",  colorname[8]);
+	XRESOURCE_LOAD_STRING("sk.color9",  colorname[9]);
+	XRESOURCE_LOAD_STRING("sk.color10", colorname[10]);
+	XRESOURCE_LOAD_STRING("sk.color11", colorname[11]);
+	XRESOURCE_LOAD_STRING("sk.color12", colorname[12]);
+	XRESOURCE_LOAD_STRING("sk.color13", colorname[13]);
+	XRESOURCE_LOAD_STRING("sk.color14", colorname[14]);
+	XRESOURCE_LOAD_STRING("sk.color15", colorname[15]);
+
+	XRESOURCE_LOAD_STRING("sk.altcolor0",  altcolorname[0]);
+	XRESOURCE_LOAD_STRING("sk.altcolor1",  altcolorname[1]);
+	XRESOURCE_LOAD_STRING("sk.altcolor2",  altcolorname[2]);
+	XRESOURCE_LOAD_STRING("sk.altcolor3",  altcolorname[3]);
+	XRESOURCE_LOAD_STRING("sk.altcolor4",  altcolorname[4]);
+	XRESOURCE_LOAD_STRING("sk.altcolor5",  altcolorname[5]);
+	XRESOURCE_LOAD_STRING("sk.altcolor6",  altcolorname[6]);
+	XRESOURCE_LOAD_STRING("sk.altcolor7",  altcolorname[7]);
+	XRESOURCE_LOAD_STRING("sk.altcolor8",  altcolorname[8]);
+	XRESOURCE_LOAD_STRING("sk.altcolor9",  altcolorname[9]);
+	XRESOURCE_LOAD_STRING("sk.altcolor10", altcolorname[10]);
+	XRESOURCE_LOAD_STRING("sk.altcolor11", altcolorname[11]);
+	XRESOURCE_LOAD_STRING("sk.altcolor12", altcolorname[12]);
+	XRESOURCE_LOAD_STRING("sk.altcolor13", altcolorname[13]);
+	XRESOURCE_LOAD_STRING("sk.altcolor14", altcolorname[14]);
+	XRESOURCE_LOAD_STRING("sk.altcolor15", altcolorname[15]);
 }
 
 int
